@@ -6,49 +6,51 @@
 #define False 0
 
 // Fonction pour vérifier si la grille initial est correct ou non.
-int verification_init() {
-
+int verifier_validite_grille() {
+    return 0;
 }
 
 // Fonction pour vérifier si la grille a été résolue ou non.
-int verification_final(int **tab, int n) {
-    for(int i = 0; i<n; i++) { // Boucle pour parcourir les éléments de la première ligne de la matrice.
-        if(tab[i][0] != i+1) { // Condition pour que la résolution soit erronée. Si les éléments de la première ligne sont différents de i+1.
-            return False; // La fonction retourne False si l'un des éléments de la première ligne n'est pas dons son emplacement initial.
-        }
-        for(int j = 1; j<n; j++) { // Boucle pour parcourir les éléments restants sans la première ligne.
-            if (tab[i][j] != (tab[i][j-1]+n)) { // Condition pour que la résolution soit erronée. Si les éléments sont différents des éléments de la ligne précédente + n.
-                return False; // La fonction retourne False si l'un des éléments n'est pas dans son emplacement initial.
+int verifier_grille_resolue(int **tab, int taille) {
+    for(int i = 0; i<taille; i++) { 
+        for(int j = 0; j<taille; j++) { 
+            if (i==0 && (tab[i][j] != j+1)) { // Condition pour savoir si les éléments de la première ligne sont dans l'ordre croissant ou non (à partir de l'indice + 1).
+                return False; // La fonction renvoie False si l'un des éléments de la première ligne n'est pas à son emplacement initial.
+            }
+            else if (i!=0 && (tab[i][j] != tab[i-1][j]+taille)) { // Condition pour savoir si le reste des éléments est l'ordre croissants (à partir de l'élément précédent + la taille de la grille). 
+                return False; // La fonction renvoie False si l'un des éléments de la grille n'est pas à son emplacement initial.
             }
         }
     }
     return True; // La fonction retourne True si elle n'a pas été quitté. Ce qui veux dire que tout les éléments de la matrice sont à leurs places initial. Et donc que la résolution est vérifiée.
 }
 
+// La fonction main n'est présente que pour des tests et ne sera pas présente dans la verrsion finale.
 int main() {
-    int **tab = (int **)malloc(2*sizeof(int *));
-    for(int i=0; i<2; i++) {
-        tab[i] = (int *)malloc(2*sizeof(int));
-    }
+    // Il faudrait essayer d'utiliser : Grille grille;
+    // Pour ensuite bien définire tab : int **tab = grille.tab;
+    // Et l'utiliser comme si on avait utilisé malloc.
 
-    tab[0][0] = 1;
-    tab[1][0] = 2;
-    tab[0][1] = 3;
-    tab[1][1] = 4;
+    int n = 3;
+    int **tab = (int **)malloc(n * sizeof(int *));
+	for (int i=0; i<n; i++) {
+		tab[i] = (int *)malloc(n * sizeof(int));
+	}
+    tab[0][0] = 1; tab[0][1] = 2; tab[0][2] = 3;
+    tab[1][0] = 4; tab[1][1] = 5; tab[1][2] = 6;
+    tab[2][0] = 7; tab[2][1] = 8; tab[2][2] = 9;
 
-    int etat = verification_final(tab, 2);
+    int etat = verifier_grille_resolue(tab, n);
     if (etat == True) {
         printf("Ok\n");
     }
     else {
-        printf("Error\n");
+        printf("No\n");
     }
-    
-    
-    for(int j=0; j<2; j++) {
+
+    for (int j=0; j<n; j++) {
         free(tab[j]);
     }
     free(tab);
-
     return 0;
 }
