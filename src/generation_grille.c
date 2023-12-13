@@ -13,21 +13,29 @@ typedef struct grille
 } Grille;
 
 
-Grille creer_grille_vide(int ligne, int colonne)
-{
+Grille creerGrille(int ligne, int colonne) {
     Grille grille;
     grille.nb_lignes = ligne;
     grille.nb_colonnes = colonne;
     grille.tab = (int **)malloc(ligne * sizeof(int *));
-    for (int i = 0; i < ligne; i++)
+    
+    return grille;
+}
+
+void remplirGrilleAvecZeros(Grille grille)
+{
+    int lignes = grille.nb_lignes;
+    int colonnes = grille.nb_colonnes;
+    int **tab = grille.tab;
+
+    for (int i = 0; i < lignes; i++)
     {
-        grille.tab[i] = (int *)malloc(colonne * sizeof(int));
-        for (int j = 0; j < colonne; j++)
+        tab[i] = (int *)malloc(colonnes * sizeof(int));
+        for (int j = 0; j < colonnes; j++)
         {
             grille.tab[i][j] = 0;
         }
     }
-    return grille;
 }
 
 void remplir_grille_victoire(Grille *grille)

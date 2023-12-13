@@ -13,7 +13,9 @@ int main(int argc, char *argv[]) {
     printf("Entree dans le programme.\n");
 
     
-    Grille grille = creer_grille_vide(NB_LIGNES, NB_COLONNES);
+    Grille grille = creerGrille(NB_LIGNES, NB_COLONNES);
+    remplirGrilleAvecZeros(grille);
+
     remplir_grille_victoire(&grille);
     inverser_case_haut(&grille);
 

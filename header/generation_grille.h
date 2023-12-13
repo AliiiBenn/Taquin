@@ -14,7 +14,8 @@ typedef struct grille
     int nb_colonnes;
 } Grille;
 
-Grille creer_grille_vide(int ligne, int colonne);
+Grille creerGrille(int ligne, int colonne);
+void remplirGrilleAvecZeros(Grille grille);
 void remplir_grille_victoire(Grille *grille);
 bool est_grille_victoire(Grille grille);
 Grille *remplir_grille_aleatoirement(Grille *grille);
