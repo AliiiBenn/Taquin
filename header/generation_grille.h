@@ -24,4 +24,4 @@ Cellule *creer_cellule(int valeur);
 Grille *creer_grille_vide(int nb_lignes, int nb_colonnes);
 
 Grille *remplir_grille_aleatoirement(Grille *grille);
-Grille * charger_grille_depuis_fichier(char *nom_fichier);
+Grille *charger_grille_depuis_fichier(char *nom_fichier);
