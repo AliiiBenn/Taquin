@@ -20,5 +20,6 @@ void remplir_grille_victoire(Grille *grille);
 bool est_grille_victoire(Grille grille);
 Grille *remplir_grille_aleatoirement(Grille *grille);
 Grille *charger_grille_depuis_fichier(char *nom_fichier);
+bool est_grille_soluble(Grille *grille);
 
 #endif // GENERATION_GRILLE_H

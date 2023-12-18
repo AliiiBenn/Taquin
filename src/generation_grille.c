@@ -4,27 +4,6 @@
 #include <time.h>
 
 
-/*
-
-TODO: Créer la fonction qui créer dynamiquement une cellule
-    ? Le but de cette fonction va être de créer une cellule avec la valeur passée en paramètre
-
-
-TODO: Créer la fonction qui créer dynamiquement une grille vide
-    ? Le but de cette fonction va être de créer une grille vide avec le nombre de lignes et de colonnes passées en paramètre. Chaque case de la grille doit être initialisée à une cellule ayant pour valeur 0
-
-
-TODO: Créer la fonction qui remplie une grille aléatoirement
-    ? Le but de cette fonction va être de remplir une grille aléatoirement avec des valeurs allant de 1 à 15. La dernière case doit être vide. Il ne doit pas y avoir de répétition de valeurs dans la grille
-
-
-TODO: Créer la fonction qui charge une grille depuis un fichier
-    ? Le but de cette fonction va être de charger une grille depuis un fichier. Le fichier doit contenir le nombre de lignes et de colonnes de la grille sur la première ligne. Ensuite, chaque ligne doit contenir les valeurs de chaque cellule séparées par un espace. La dernière case doit être vide. Il ne doit pas y avoir de répétition de valeurs dans la grille
-
-*/
-
-
-
 typedef struct grille
 {
     int **tab;
@@ -50,11 +29,7 @@ void remplirGrilleAvecZeros(Grille grille)
 
     for (int i = 0; i < lignes; i++)
     {
-        tab[i] = (int *)malloc(colonnes * sizeof(int));
-        for (int j = 0; j < colonnes; j++)
-        {
-            grille.tab[i][j] = 0;
-        }
+        tab[i] = calloc(colonnes, sizeof(int));
     }
 }
 
@@ -103,21 +78,8 @@ bool est_grille_victoire(Grille grille)
     return true;
 }
 
-Grille *remplir_grille_aleatoirement(Grille *grille)
+void melanger_valeurs(int *valeurs, int nb_cases)
 {
-    // Initialisation du générateur de nombres aléatoires
-    srand(time(NULL));
-
-    int nb_cases = grille->nb_lignes * grille->nb_colonnes;
-    int *valeurs = (int *)malloc(nb_cases * sizeof(int));
-
-    // Remplissage du tableau de valeurs uniques
-    for (int i = 0; i < nb_cases; i++)
-    {
-        valeurs[i] = i + 1;
-    }
-
-    // Mélange des valeurs
     for (int i = 0; i < nb_cases - 1; i++)
     {
         int j = i + rand() % (nb_cases - i);
@@ -125,25 +87,73 @@ Grille *remplir_grille_aleatoirement(Grille *grille)
         valeurs[i] = valeurs[j];
         valeurs[j] = temp;
     }
+}
 
-    // Remplissage de la grille avec les valeurs aléatoires
+void remplir_grille_valeurs(Grille *grille, int *valeurs, int nb_cases)
+{
     int index = 0;
     for (int i = 0; i < grille->nb_lignes; i++)
     {
         for (int j = 0; j < grille->nb_colonnes; j++)
         {
-            if (index == nb_cases - 1)
-            {
-                grille->tab[i][j] = -1;
-            }
-            else
-            {
-                grille->tab[i][j] = valeurs[index];
-            }
+            grille->tab[i][j] = (index == nb_cases - 1) ? -1 : valeurs[index];
             index++;
         }
     }
+}
+
+void remplir_grille_aleatoirement(Grille *grille)
+{
+    srand(time(NULL));
+
+    int nb_cases = grille->nb_lignes * grille->nb_colonnes;
+    int *valeurs = (int *)malloc(nb_cases * sizeof(int));
+
+    for (int i = 0; i < nb_cases; i++)
+    {
+        valeurs[i] = i + 1;
+    }
+
+    melanger_valeurs(valeurs, nb_cases);
+
+    remplir_grille_valeurs(grille, valeurs, nb_cases);
 
     free(valeurs);
-    return grille;
+}
+
+
+bool est_grille_soluble(Grille *grille)
+{
+    int inversion_count = 0;
+    int blank_row = 0;
+    int blank_col = 0;
+
+    for (int i = 0; i < grille->nb_lignes; i++) {
+        for (int j = 0; j < grille->nb_colonnes; j++) {
+            int current_value = grille->tab[i][j];
+
+            // Ignorer la case vide
+            if (current_value == 0) {
+                blank_row = i;
+                blank_col = j;
+                continue;
+            }
+
+            for (int x = i; x < grille->nb_lignes; x++)
+            {
+                for (int y = (x == i) ? j + 1 : 0; y < grille->nb_colonnes; y++)
+                {
+                    int next_value = grille->tab[x][y];
+                    if (next_value != 0 && current_value > next_value) {
+                        inversion_count++;
+                    }
+                }
+            }
+        }
+    }
+
+    bool is_permutation_even = (inversion_count % 2 == 0);
+    bool is_blank_even = ((grille->nb_lignes - blank_row) % 2 == 0);
+
+    return (is_permutation_even == is_blank_even);
 }

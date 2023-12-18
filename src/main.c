@@ -16,11 +16,18 @@ int main(int argc, char *argv[]) {
     Grille grille = creerGrille(NB_LIGNES, NB_COLONNES);
     remplirGrilleAvecZeros(grille);
 
-    remplir_grille_victoire(&grille);
-    inverser_case_haut(&grille);
+    remplir_grille_aleatoirement(&grille);
+
+    while (!est_grille_soluble(&grille))
+    {
+        remplirGrilleAvecZeros(grille);
+        remplir_grille_aleatoirement(&grille);
+    }
 
     afficher_grille(grille);
     printf("\n");
+
+    
 
 
     while (true) {
