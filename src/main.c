@@ -32,6 +32,10 @@ int main(int argc, char *argv[]) {
 
     while (true) {
         char touche = getch();
+        const char * command = "clear";
+        
+        system(command);
+
         if (touche == 'q')
         {
             inverser_case_gauche(&grille);
@@ -47,6 +51,10 @@ int main(int argc, char *argv[]) {
         else if (touche == 's')
         {
             inverser_case_bas(&grille);
+        }
+        else if (touche == ' ')
+        {
+            break;
         }
 
         afficher_grille(grille);
