@@ -11,7 +11,9 @@
 
 int main(int argc, char *argv[]) {
     printf("Entree dans le programme.\n");
-
+    printf("Utiliser ces touches pour jouer :");
+    printf("\t   Z\n");
+    printf("\t\t\t\t\tQ  S  D\n\n");
     
     Grille grille = creerGrille(NB_LIGNES, NB_COLONNES);
     remplirGrilleAvecZeros(grille);
@@ -31,6 +33,7 @@ int main(int argc, char *argv[]) {
 
 
     while (true) {
+        fflush(stdout);
         char touche = getch();
         const char * command = "clear";
         
@@ -63,6 +66,10 @@ int main(int argc, char *argv[]) {
         if (est_grille_victoire(grille)) {
             printf("Felicitations, vous avez gagne !\n");
             break;
+        }
+        else 
+        {
+            printf("On continue !\n\n");
         }
     }
     

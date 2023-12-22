@@ -59,16 +59,13 @@ bool est_grille_victoire(Grille grille)
     {
         for (int j = 0; j < grille.nb_colonnes; j++)
         {
-            if (i == grille.nb_lignes - 1 && j == grille.nb_colonnes - 1)
+            if (grille.tab[i][j] != grille.nb_lignes * i + j + 1)
             {
-                if (grille.tab[i][j] != -1)
+                if (grille.tab[i][j] == -1)
                 {
-                    return false;
+                    continue;
                 }
-            }
-            else
-            {
-                if (grille.tab[i][j] != grille.nb_lignes * i + j + 1)
+                else
                 {
                     return false;
                 }
