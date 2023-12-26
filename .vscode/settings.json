@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "time.h": "c"
+        "time.h": "c",
+        "affichage_grille.h": "c"
     }
 }
