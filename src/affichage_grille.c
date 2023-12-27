@@ -8,6 +8,11 @@
 
 
 
+/**
+ * Affiche la grille passée en paramètre.
+ * 
+ * @param grille La grille à afficher.
+ */
 void afficher_grille(Grille grille)
 {
     printf("\n");

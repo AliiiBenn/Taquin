@@ -7,6 +7,13 @@
 #include "../header/inversion_case.h"
 
 
+/**
+ * Crée une grille avec le nombre de lignes et de colonnes spécifié.
+ * 
+ * @param ligne Le nombre de lignes de la grille.
+ * @param colonne Le nombre de colonnes de la grille.
+ * @return La grille créée.
+ */
 Grille creerGrille(int ligne, int colonne) {
     Grille grille;
     grille.nb_lignes = ligne;
@@ -20,6 +27,13 @@ Grille creerGrille(int ligne, int colonne) {
     return grille;
 }
 
+/**
+ * Crée une grille remplie de zéros avec le nombre de lignes et de colonnes spécifié.
+ * 
+ * @param ligne Le nombre de lignes de la grille.
+ * @param colonne Le nombre de colonnes de la grille.
+ * @return La grille remplie de zéros.
+ */
 Grille creerGrilleZeros(int ligne, int colonne)
 {
     Grille grille = creerGrille(ligne, colonne);
@@ -36,7 +50,13 @@ Grille creerGrilleZeros(int ligne, int colonne)
     return grille;
 }
 
-
+/**
+ * Crée une grille de victoire avec les dimensions spécifiées.
+ *
+ * @param ligne Le nombre de lignes de la grille.
+ * @param colonne Le nombre de colonnes de la grille.
+ * @return La grille de victoire créée.
+ */
 Grille creerGrilleVictoire(int ligne, int colonne)
 {
     Grille grille = creerGrille(ligne, colonne);
@@ -61,6 +81,12 @@ Grille creerGrilleVictoire(int ligne, int colonne)
     return grille;
 }
 
+/**
+ * Vérifie si la grille spécifiée est une grille de victoire.
+ *
+ * @param grille La grille à vérifier.
+ * @return true si la grille est une grille de victoire, sinon false.
+ */
 bool est_grille_victoire(Grille grille)
 {
     for (int i = 0; i < grille.nb_lignes; i++)
@@ -84,7 +110,13 @@ bool est_grille_victoire(Grille grille)
 }
 
 
-
+/**
+ * Crée une grille aléatoire avec le nombre de lignes et de colonnes spécifié.
+ * 
+ * @param ligne Le nombre de lignes de la grille.
+ * @param colonne Le nombre de colonnes de la grille.
+ * @return La grille aléatoire créée.
+ */
 Grille creerGrilleAleatoire(int ligne, int colonne)
 {
     Grille grille = creerGrilleVictoire(ligne, colonne);
@@ -114,6 +146,14 @@ Grille creerGrilleAleatoire(int ligne, int colonne)
 }
 
 
+/**
+ * Crée une grille à partir d'un fichier.
+ * 
+ * @param nomFichier Le nom du fichier contenant les valeurs de la grille.
+ * @param ligne Le nombre de lignes de la grille.
+ * @param colonne Le nombre de colonnes de la grille.
+ * @return La grille créée à partir du fichier.
+ */
 Grille creerGrilleDepuisFichier(char * nomFichier, int ligne, int colonne) {
     Grille grille = creerGrille(ligne, colonne);
     FILE *fichier = fopen(nomFichier, "r");
