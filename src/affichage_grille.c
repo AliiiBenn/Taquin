@@ -10,6 +10,7 @@
 
 void afficher_grille(Grille grille)
 {
+    printf("\n");
     for (int i = 0; i < grille.nb_lignes; i++)
     {
         printf("|");
@@ -31,4 +32,5 @@ void afficher_grille(Grille grille)
             }
         }
     }
+    printf("\n");
 }

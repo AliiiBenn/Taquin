@@ -1,6 +1,6 @@
 
-#define NB_LIGNES 4
-#define NB_COLONNES 4
+#define NB_LIGNES 6
+#define NB_COLONNES 6
 
 #ifndef GENERATION_GRILLE_H
 #define GENERATION_GRILLE_H
