@@ -113,3 +113,24 @@ Grille creerGrilleAleatoire(int ligne, int colonne)
     return grille;
 }
 
+
+Grille creerGrilleDepuisFichier(char * nomFichier, int ligne, int colonne) {
+    Grille grille = creerGrille(ligne, colonne);
+    FILE *fichier = fopen(nomFichier, "r");
+
+    if (fichier == NULL) {
+        printf("Erreur lors de l'ouverture du fichier.\n");
+        return grille;
+    }
+
+    for (int i = 0; i < ligne; i++) {
+        for (int j = 0; j < colonne; j++) {
+            int valeur;
+            fscanf(fichier, "%d", &valeur);
+            grille.tab[i][j] = valeur;
+        }
+    }
+
+    fclose(fichier);
+    return grille;
+}

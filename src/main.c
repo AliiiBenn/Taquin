@@ -52,7 +52,7 @@ bool jouer_tour(Grille* grille) {
 
 int main(int argc, char *argv[]) {
     printf("Utiliser les touches (Z, Q, S, D) pour jouer :\n");
-    Grille grille = creerGrilleAleatoire(NB_LIGNES, NB_COLONNES);
+    Grille grille = creerGrilleDepuisFichier("grilles/grille.txt", NB_LIGNES, NB_COLONNES);
 
     bool running = true;
     while (running) {

@@ -23,6 +23,6 @@ bool est_grille_victoire(Grille grille);
 Grille creerGrilleAleatoire(int ligne, int colonne);
 Grille *charger_grille_depuis_fichier(char *nom_fichier);
 bool est_grille_soluble(Grille *grille);
-
+Grille creerGrilleDepuisFichier(char *nomFichier, int ligne, int colonne);
 
 #endif
