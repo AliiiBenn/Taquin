@@ -6,20 +6,23 @@
 #define GENERATION_GRILLE_H
 
 #include <stdbool.h>
+#include "grille.h"
 
-typedef struct grille
-{
-    int **tab;
-    int nb_lignes;
-    int nb_colonnes;
-} Grille;
+
+// typedef struct grille
+// {
+//     int **tab;
+//     int nb_lignes;
+//     int nb_colonnes;
+// } Grille;
 
 Grille creerGrille(int ligne, int colonne);
-void remplirGrilleAvecZeros(Grille grille);
-void remplir_grille_victoire(Grille *grille);
+Grille creerGrilleZeros(int ligne, int colonne);
+Grille creerGrilleVictoire(int ligne, int colonne);
 bool est_grille_victoire(Grille grille);
-Grille *remplir_grille_aleatoirement(Grille *grille);
+Grille creerGrilleAleatoire(int ligne, int colonne);
 Grille *charger_grille_depuis_fichier(char *nom_fichier);
 bool est_grille_soluble(Grille *grille);
 
-#endif // GENERATION_GRILLE_H
+
+#endif
