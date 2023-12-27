@@ -8,7 +8,6 @@
 #include "../header/affichage_grille.h"
 #include "../header/inversion_case.h"
 #include "../header/chronometre.h"
-#include "../header/sauvegarde.h"
 
 
 bool gererResultatInput(Grille *grille)
